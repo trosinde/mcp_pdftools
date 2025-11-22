@@ -16,7 +16,7 @@ Dieses Dokument beschreibt den **verbindlichen Entwicklungsprozess** für alle F
 
 ## Team-Rollen
 
-Das Development Team besteht aus 6 spezialisierten Rollen:
+Das Development Team besteht aus 7 spezialisierten Rollen:
 
 ### 1. Requirements Engineer 📋
 **Verantwortlichkeiten**:
@@ -93,6 +93,33 @@ Das Development Team besteht aus 6 spezialisierten Rollen:
 - ✅ Jedes CLI-Tool hat eine eigene Markdown-Dokumentation
 - ✅ Beispiele sind funktionstüchtig und getestet
 - ✅ Screenshots/Diagramme wo sinnvoll
+
+### 7. Reviewer 🔍 **THINK ULTRA HARD**
+**Verantwortlichkeiten**:
+- Pre-Commit Konsistenz-Checks aus GitHub-User-Perspektive
+- Verhindert einfachste Fehler bevor sie committed werden
+- Denkt wie ein externer Betrachter des Repositories
+- Ultra-kritische Qualitätssicherung
+
+**Konsistenz-Checks** (vor JEDEM Commit):
+- ✅ **README.md**: Alle Tools korrekt aufgelistet mit Status & Links?
+- ✅ **Traceability Matrix**: Alle Features korrekt verlinkt & Status konsistent?
+- ✅ **Tool-Dokumentation**: Für jedes Released-Tool existiert `docs/tools/TOOL-NAME.md`?
+- ✅ **Requirements README**: Status-Spalte konsistent mit Traceability Matrix?
+- ✅ **Links**: Alle Markdown-Links funktionieren (keine 404s)?
+- ✅ **Versions-Konsistenz**: Version in REQ-XXX = Version in README?
+- ✅ **Code vs. Docs**: Implementierung existiert für alle "Released" Features?
+- ✅ **Naming-Konsistenz**: Tool-Namen konsistent (pdfmerge vs. pdf-merge)?
+- ✅ **Completeness**: Jedes Feature hat REQ + DESIGN + CODE + (optional) TEST?
+- ✅ **Git History**: Commit-Message folgt Conventional Commits?
+
+**Deliverables**:
+- Pre-Commit Checklist (abgehakt)
+- Fehlerliste falls Inkonsistenzen gefunden
+
+**Mindset**:
+> "Ich bin ein GitHub-User der dieses Repo zum ersten Mal sieht.
+> Welche Inkonsistenzen würden MIR sofort auffallen?"
 
 ---
 
