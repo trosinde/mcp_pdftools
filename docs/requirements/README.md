@@ -58,7 +58,7 @@ Test Report (TEST-XXX v1.0)
 | REQ-002 | PDF Split | 1.0 | Released | PDF in einzelne Seiten/Bereiche aufteilen (4 Modi) |
 | REQ-003 | OCR Processing | 1.0 | Draft | OCR-Verarbeitung von PDFs |
 | REQ-004 | PDF Protection | 1.0 | Draft | PDF-Verschlüsselung |
-| REQ-005 | Text Extraction | 1.0 | Draft | Textextraktion aus PDFs |
+| REQ-005 | Text Extraction | 1.0 | Released | Textextraktion aus PDFs (4 Modi, 3 Formate) |
 | REQ-006 | Thumbnail Generation | 1.0 | Draft | Thumbnail-Generierung |
 | REQ-007 | Invoice Renaming | 1.0 | Draft | Intelligente PDF-Umbenennung |
 | REQ-008 | Installation & De-Installation | 1.0 | Released | Automatisierte Installation mit Docker-Setup für OCR |
