@@ -2,7 +2,7 @@
 
 **ID**: REQ-002
 **Version**: 1.0
-**Status**: Approved
+**Status**: Released
 **Priority**: High
 **Created by**: Requirements Engineer
 **Created on**: 2025-11-22

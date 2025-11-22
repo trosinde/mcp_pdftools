@@ -3,7 +3,7 @@
 **ID**: DESIGN-002
 **Version**: 1.0
 **Requirement**: [REQ-002](../requirements/REQ-002-pdf-split.md) v1.0
-**Status**: Approved
+**Status**: Implemented
 **Architekt**: System Architect
 **Entwickler**: Python Developer
 **Created on**: 2025-11-22
