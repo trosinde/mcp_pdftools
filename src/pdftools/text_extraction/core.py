@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Optional, Union
 
-from pdftools.core.validators import validate_pdf_path, validate_output_dir
+from pdftools.core.validators import validate_pdf_path, validate_directory
 from pdftools.core.exceptions import ValidationError
 
 from .models import (
@@ -95,7 +95,7 @@ def extract_text(
                 )
         else:
             # Validate output directory can be created
-            validate_output_dir(config.output_path.parent, create=True)
+            validate_directory(config.output_path.parent, create_if_missing=True)
 
     # Create appropriate extractor
     extractor = _create_extractor(config)
