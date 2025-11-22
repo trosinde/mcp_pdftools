@@ -13,10 +13,10 @@ MCP PDF Tools is a comprehensive collection of Python-based utilities for PDF do
 | **pdfmerge** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfmerge.md) |
 | **pdfsplit** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfsplit.md) |
 | **ocrutil** | ✅ Released | 1.0.0 | [Documentation](docs/tools/ocrutil.md) |
-| **pdfgettxt** | ✅ Released | 1.0.0 | Text extraction with 4 modes |
-| **pdfprotect** | ✅ Released | 1.0.0 | Password & permission protection |
-| **pdfthumbnails** | ✅ Released | 1.0.0 | Thumbnail generation (PNG/JPG) |
-| **pdfrename** | ✅ Released | 1.0.0 | Intelligent invoice renaming |
+| **pdfgettxt** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfgettxt.md) |
+| **pdfprotect** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfprotect.md) |
+| **pdfthumbnails** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfthumbnails.md) |
+| **pdfrename** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfrename.md) |
 
 ---
 
@@ -346,6 +346,10 @@ Automatically installed with `pip install -e .`:
 - **[PDF Merge](docs/tools/pdfmerge.md)** - Merge tool documentation
 - **[PDF Split](docs/tools/pdfsplit.md)** - Split tool documentation
 - **[OCR Utility](docs/tools/ocrutil.md)** - OCR tool documentation
+- **[Text Extraction](docs/tools/pdfgettxt.md)** - Text extraction with 4 modes
+- **[PDF Protection](docs/tools/pdfprotect.md)** - Password & permission protection
+- **[Thumbnail Generation](docs/tools/pdfthumbnails.md)** - Thumbnail image generation
+- **[Invoice Renaming](docs/tools/pdfrename.md)** - Intelligent invoice renaming
 
 ### Developer Documentation
 - **[Development Process](docs/DEVELOPMENT_PROCESS.md)** - Team workflow and guidelines
@@ -514,12 +518,6 @@ See [DEVELOPMENT_PROCESS.md](docs/DEVELOPMENT_PROCESS.md) for detailed workflow.
 ## Roadmap
 
 ### Future Features
-
-#### Planned Tools (Coming Soon)
-- **pdfgettxt**: Advanced text extraction with multiple modes
-- **pdfprotect**: Password protection and encryption
-- **pdfthumbnails**: Thumbnail image generation
-- **pdfrename**: Intelligent invoice renaming
 
 #### Future Enhancements
 - GUI application for non-technical users
