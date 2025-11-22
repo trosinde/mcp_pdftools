@@ -519,13 +519,31 @@ See [DEVELOPMENT_PROCESS.md](docs/DEVELOPMENT_PROCESS.md) for detailed workflow.
 
 ### Future Features
 
+#### Planned: MCP Server Integration (REQ-010)
+**Status**: Design Phase (Draft)
+
+Enable AI Agents (Claude Code, Claude Desktop, OpenCode) to use all PDFTools via MCP (Model Context Protocol).
+
+**What it enables:**
+- Natural language PDF workflows: "Merge these 3 PDFs and protect with password"
+- Automatic tool selection by AI
+- Seamless integration in Claude Desktop, Claude Code, OpenCode
+
+**Installation (when released):**
+```bash
+npm install -g @trosinde/mcp-pdftools
+```
+
+**Documentation:**
+- [REQ-010: MCP Server Requirements](docs/requirements/REQ-010-mcp-server.md)
+- [DESIGN-010: MCP Server Design](docs/design/DESIGN-010-mcp-server.md)
+
 #### Future Enhancements
 - GUI application for non-technical users
 - Batch processing workflows
 - PDF compression and optimization
 - Watermarking capabilities
 - Digital signature verification
-- MCP Server integration for AI assistants
 
 ---
 
