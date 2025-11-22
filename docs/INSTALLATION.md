@@ -1,43 +1,80 @@
 # Installation Guide - MCP PDF Tools
 
-Complete installation instructions for all platforms.
-
 **Version**: 2.2.0
 **Last Updated**: 2025-11-22
 
 ---
 
-## Table of Contents
+## ⚡ Schnellstart (Empfohlen für 99% der Benutzer)
 
-1. [Quick Start](#quick-start)
-2. [Automated Installation (Linux/macOS)](#automated-installation-linuxmacos)
-3. [Manual Installation](#manual-installation)
-4. [Windows Installation](#windows-installation)
-5. [System Requirements](#system-requirements)
-6. [Troubleshooting](#troubleshooting)
-7. [Uninstallation](#uninstallation)
-8. [MCP Server Configuration](#mcp-server-configuration)
+### ✅ Linux/macOS - Automatische Installation
 
----
-
-## Quick Start
-
-### Linux/macOS (Automated)
+**Das ist alles, was Sie brauchen:**
 
 ```bash
+# 1. Repository klonen
 git clone https://github.com/yourusername/mcp_pdftools.git
+
+# 2. In Verzeichnis wechseln
 cd mcp_pdftools
+
+# 3. Installer starten
 ./install.sh
 ```
 
-That's it! The installer handles everything automatically.
+**Das war's!** 🎉 Der Installer macht automatisch:
+- ✅ Python installieren (falls fehlt)
+- ✅ Docker installieren (falls fehlt)
+- ✅ Git installieren (falls fehlt)
+- ✅ Virtual Environment erstellen
+- ✅ Alle Abhängigkeiten installieren
+- ✅ Tests durchführen
+- ✅ MCP Server konfigurieren (optional)
 
-### Windows (Manual)
+**Zeit**: 5-15 Minuten (je nachdem, was schon installiert ist)
+
+---
+
+### 🪟 Windows - Manuelle Anleitung
+
+Windows benötigt manuelle Schritte:
 
 ```batch
-# See Windows Installation section below
+cd mcp_pdftools
 install.bat
 ```
+
+Das zeigt Ihnen die Installations-Schritte an.
+
+---
+
+## ⚠️ Wann brauchen Sie die manuelle Installation?
+
+**Nur in diesen seltenen Fällen:**
+- ❌ Der automatische Installer funktioniert nicht
+- ❌ Sie wollen die Installation selbst kontrollieren
+- ❌ Sie haben spezielle Anforderungen
+
+**Für 99% der Benutzer:** Nutzen Sie einfach `./install.sh` oben! 👆
+
+---
+
+## 📚 Detaillierte Dokumentation
+
+<details>
+<summary><b>Klicken Sie hier für Details zur automatischen Installation</b></summary>
+
+## Table of Contents
+
+1. [Automated Installation Details](#automated-installation-linuxmacos)
+2. [Manual Installation (Advanced)](#manual-installation)
+3. [Windows Installation](#windows-installation)
+4. [System Requirements](#system-requirements)
+5. [Troubleshooting](#troubleshooting)
+6. [Uninstallation](#uninstallation)
+7. [MCP Server Configuration](#mcp-server-configuration)
+
+</details>
 
 ---
 
