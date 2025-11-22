@@ -14,6 +14,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INSTALL_DIR="$SCRIPT_DIR"
 LOG_FILE="$HOME/.mcp_pdftools/logs/uninstall_$(date +%Y-%m-%d_%H-%M-%S).log"
 
+# Source utility functions
+if [ -f "$SCRIPT_DIR/scripts/install_utils.sh" ]; then
+    source "$SCRIPT_DIR/scripts/install_utils.sh"
+fi
+
 # ============================================================================
 # Logging
 # ============================================================================
