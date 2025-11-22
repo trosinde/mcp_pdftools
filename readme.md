@@ -10,13 +10,13 @@ MCP PDF Tools is a comprehensive collection of Python-based utilities for PDF do
 
 | Tool | Status | Version | Documentation |
 |------|--------|---------|---------------|
-| **pdfmerge** | Released | 1.0.0 | [Documentation](docs/tools/pdfmerge.md) |
-| **pdfsplit** | Released | 1.0.0 | [Documentation](docs/tools/pdfsplit.md) |
-| **ocrutil** | Released | 1.0.0 | [Documentation](docs/tools/ocrutil.md) |
-| **pdfgettxt** | Planned | - | Coming soon |
-| **pdfprotect** | Planned | - | Coming soon |
-| **pdfthumbnails** | Planned | - | Coming soon |
-| **pdfrename** | Planned | - | Coming soon |
+| **pdfmerge** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfmerge.md) |
+| **pdfsplit** | ✅ Released | 1.0.0 | [Documentation](docs/tools/pdfsplit.md) |
+| **ocrutil** | ✅ Released | 1.0.0 | [Documentation](docs/tools/ocrutil.md) |
+| **pdfgettxt** | ✅ Released | 1.0.0 | Text extraction with 4 modes |
+| **pdfprotect** | ✅ Released | 1.0.0 | Password & permission protection |
+| **pdfthumbnails** | ✅ Released | 1.0.0 | Thumbnail generation (PNG/JPG) |
+| **pdfrename** | ✅ Released | 1.0.0 | Intelligent invoice renaming |
 
 ---
 
