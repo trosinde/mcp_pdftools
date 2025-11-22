@@ -55,7 +55,7 @@ Test Report (TEST-XXX v1.0)
 | ID | Name | Version | Status | Beschreibung |
 |----|------|---------|--------|--------------|
 | REQ-001 | PDF Merge | 1.0 | Released | Zusammenführen mehrerer PDFs |
-| REQ-002 | PDF Split | 1.0 | Draft | PDF in einzelne Seiten aufteilen |
+| REQ-002 | PDF Split | 1.0 | Released | PDF in einzelne Seiten/Bereiche aufteilen (4 Modi) |
 | REQ-003 | OCR Processing | 1.0 | Draft | OCR-Verarbeitung von PDFs |
 | REQ-004 | PDF Protection | 1.0 | Draft | PDF-Verschlüsselung |
 | REQ-005 | Text Extraction | 1.0 | Draft | Textextraktion aus PDFs |
