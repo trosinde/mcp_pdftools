@@ -46,6 +46,30 @@ log_success() {
 }
 
 # ============================================================================
+# User Interaction
+# ============================================================================
+
+confirm() {
+    local prompt="$1"
+    local response
+
+    while true; do
+        read -p "$prompt [y/N]: " response
+        case "$response" in
+            [Yy]|[Yy][Ee][Ss])
+                return 0
+                ;;
+            [Nn]|[Nn][Oo]|"")
+                return 1
+                ;;
+            *)
+                echo "Please answer yes or no."
+                ;;
+        esac
+    done
+}
+
+# ============================================================================
 # Platform Detection
 # ============================================================================
 
