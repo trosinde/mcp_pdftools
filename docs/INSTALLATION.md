@@ -13,7 +13,7 @@
 
 ```bash
 # 1. Repository klonen
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 
 # 2. In Verzeichnis wechseln
 cd mcp_pdftools
@@ -23,15 +23,19 @@ cd mcp_pdftools
 ```
 
 **Das war's!** 🎉 Der Installer macht automatisch:
+- ✅ Erkennt automatisch das geklonte Repository
 - ✅ Python installieren (falls fehlt)
 - ✅ Docker installieren (falls fehlt)
 - ✅ Git installieren (falls fehlt)
 - ✅ Virtual Environment erstellen
 - ✅ Alle Abhängigkeiten installieren
+- ✅ Shell-Konfiguration anbieten (.bashrc/.zshrc)
 - ✅ Tests durchführen
 - ✅ MCP Server konfigurieren (optional)
 
 **Zeit**: 5-15 Minuten (je nachdem, was schon installiert ist)
+
+**Hinweis**: Das Skript erkennt automatisch, dass Sie es aus dem geklonten Repository heraus ausführen und verwendet dieses Verzeichnis für die Installation. Sie müssen **keine** Parameter angeben!
 
 ---
 
@@ -102,7 +106,7 @@ The automated installer (`install.sh`) performs the following steps:
 #### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 cd mcp_pdftools
 ```
 
@@ -112,6 +116,8 @@ cd mcp_pdftools
 ./install.sh
 ```
 
+**The installer auto-detects that you're running from a cloned repository!**
+
 The installer will display:
 ```
 ╔═══════════════════════════════════════════════════════════╗
@@ -119,8 +125,8 @@ The installer will display:
 ║                       Version 1.0                         ║
 ╚═══════════════════════════════════════════════════════════╝
 
-Installation Directory: /home/user/mcp_pdftools
-Repository URL: https://github.com/YOUR_ORG/mcp_pdftools.git
+Installation Directory: /home/user/repos/mcp_pdftools (auto-detected)
+Repository: Using existing repository
 
 This script will install:
   • Python 3.11+
@@ -309,7 +315,7 @@ Download Docker Desktop from [docs.docker.com/desktop](https://docs.docker.com/d
 #### 4. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 cd mcp_pdftools
 ```
 
@@ -420,7 +426,7 @@ After installation:
 
 ```batch
 cd %USERPROFILE%
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 cd mcp_pdftools
 ```
 
@@ -607,7 +613,7 @@ If installation fails:
 2. **Review Error Messages**: Installation shows clear error messages
 3. **Run Tests**: `python scripts/test_installation.py`
 4. **Manual Install**: Try manual installation steps above
-5. **Report Issue**: [GitHub Issues](https://github.com/yourusername/mcp_pdftools/issues)
+5. **Report Issue**: [GitHub Issues](https://github.com/trosinde/mcp_pdftools/issues)
 
 Include in your issue:
 - Operating system and version
@@ -841,9 +847,9 @@ After successful installation:
 
 ## Support
 
-- **Documentation**: [GitHub Repository](https://github.com/yourusername/mcp_pdftools)
-- **Issues**: [Report a Bug](https://github.com/yourusername/mcp_pdftools/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/mcp_pdftools/discussions)
+- **Documentation**: [GitHub Repository](https://github.com/trosinde/mcp_pdftools)
+- **Issues**: [Report a Bug](https://github.com/trosinde/mcp_pdftools/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/trosinde/mcp_pdftools/discussions)
 
 ---
 

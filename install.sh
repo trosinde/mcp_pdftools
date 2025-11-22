@@ -13,9 +13,18 @@ set -o pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export MCP_INSTALL_LOG=""
 
-# Default configuration
-export INSTALL_DIR="${INSTALL_DIR:-$HOME/mcp_pdftools}"
-export REPO_URL="${REPO_URL:-https://github.com/YOUR_ORG/mcp_pdftools.git}"
+# Auto-detect: If running from a cloned repository, use it directly
+# This allows users to run: git clone <repo> && cd <repo> && ./install.sh
+if [ -f "$SCRIPT_DIR/setup.py" ] && [ -d "$SCRIPT_DIR/src/pdftools" ] && [ -d "$SCRIPT_DIR/.git" ]; then
+    # We're running from a cloned repository - use it as INSTALL_DIR
+    export INSTALL_DIR="${INSTALL_DIR:-$SCRIPT_DIR}"
+    # No need to clone again - we already have the repository
+    export REPO_URL="${REPO_URL:-}"
+else
+    # We're running from a downloaded script - clone to default location
+    export INSTALL_DIR="${INSTALL_DIR:-$HOME/mcp_pdftools}"
+    export REPO_URL="${REPO_URL:-https://github.com/trosinde/mcp_pdftools.git}"
+fi
 export PYTHON_VERSION="${PYTHON_VERSION:-3.11}"
 export SKIP_DOCKER="${SKIP_DOCKER:-false}"
 export SKIP_TESTS="${SKIP_TESTS:-false}"

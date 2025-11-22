@@ -574,6 +574,17 @@ upgrade_pip() {
 # ============================================================================
 
 clone_repository() {
+    # If REPO_URL is empty, we're running from an existing repository
+    if [ -z "$REPO_URL" ]; then
+        log_info "Using existing repository at $INSTALL_DIR"
+        if [ ! -d "$INSTALL_DIR/.git" ]; then
+            log_error "Expected git repository at $INSTALL_DIR but .git directory not found"
+            return 1
+        fi
+        log_info "✓ Repository found"
+        return 0
+    fi
+
     log_info "Cloning repository from $REPO_URL..."
 
     if [ -d "$INSTALL_DIR/.git" ]; then

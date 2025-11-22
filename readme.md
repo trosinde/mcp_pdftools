@@ -119,7 +119,7 @@ ocrutil -f contract.pdf --pages "1-5,10" --output-mode json -o data.json
 
 **Linux/macOS** - Nur 3 Befehle:
 ```bash
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 cd mcp_pdftools
 ./install.sh
 ```
@@ -141,7 +141,7 @@ The installer automatically:
 **Windows**:
 ```batch
 # Clone repository
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 cd mcp_pdftools
 
 # Follow manual instructions
@@ -155,7 +155,7 @@ install.bat
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 cd mcp_pdftools
 
 # Create virtual environment
@@ -527,7 +527,7 @@ For detailed troubleshooting, see:
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/mcp_pdftools.git
+git clone https://github.com/trosinde/mcp_pdftools.git
 cd mcp_pdftools
 
 # Create virtual environment
