@@ -76,14 +76,14 @@ Das Development Team besteht aus 7 spezialisierten Rollen:
 **Verantwortlichkeiten**:
 - Erstellt und pflegt End-User-Dokumentation
 - Aktualisiert README.md mit neuesten Features
-- Erstellt Installationsanleitungen (INSTALLATION.md)
+- Erstellt Installationsanleitungen (docs/INSTALLATION.md)
 - Erstellt Tool-Dokumentation für jedes CLI-Tool (docs/tools/)
 - Stellt sicher, dass Dokumentation Implementation widerspiegelt
 - Erstellt Usage-Beispiele und Tutorials
 
 **Deliverables**:
 - `README.md` (aktuell gehalten)
-- `INSTALLATION.md` (Schritt-für-Schritt Anleitung)
+- `docs/INSTALLATION.md` (Schritt-für-Schritt Anleitung)
 - `docs/tools/TOOL-NAME.md` für jedes CLI-Tool (pdfmerge, pdfsplit, etc.)
 - User Guides und Tutorials
 
@@ -447,7 +447,7 @@ pytest tests/integration/ -v
 4. **Technical Writer**: End-User-Dokumentation erstellen/aktualisieren:
    - [ ] `README.md` mit neuem Feature aktualisieren
    - [ ] Tool-Dokumentation erstellen: `docs/tools/TOOL-NAME.md`
-   - [ ] Installation Instructions in `INSTALLATION.md` aktualisieren
+   - [ ] Installation Instructions in `docs/INSTALLATION.md` aktualisieren
    - [ ] Usage-Beispiele hinzufügen
    - [ ] Prüfen: Alle CLI-Tools haben Dokumentation
 

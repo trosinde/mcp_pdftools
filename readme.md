@@ -111,22 +111,65 @@ ocrutil -f contract.pdf --pages "1-5,10" --output-mode json -o data.json
 
 ## Installation
 
-### Quick Install
+> **💡 Einfache Installation:** Für Linux/macOS einfach `./install.sh` ausführen - fertig!
+>
+> Der Installer installiert automatisch Python, Docker, Git und alle Abhängigkeiten.
+
+### 🚀 Automated Installation (Recommended)
+
+**Linux/macOS** - Nur 3 Befehle:
+```bash
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+./install.sh
+```
+
+**Das war's!** Der Installer erledigt den Rest automatisch.
+
+The installer automatically:
+- ✅ Detects your platform (Ubuntu, Debian, Fedora, macOS)
+- ✅ Installs Python 3.8+ (if not present)
+- ✅ Installs Docker (if not present)
+- ✅ Installs Git (if not present)
+- ✅ Creates Python virtual environment (venv)
+- ✅ Installs all dependencies
+- ✅ Runs functional tests
+- ✅ Configures MCP server (optional, for AI tools)
+
+**Installation takes 5-15 minutes** depending on what's already installed.
+
+**Windows**:
+```batch
+# Clone repository
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+
+# Follow manual instructions
+install.bat
+```
+
+### Manual Installation (nur falls ./install.sh nicht funktioniert)
+
+<details>
+<summary>Klicken Sie hier für manuelle Installations-Schritte</summary>
 
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/mcp_pdftools.git
 cd mcp_pdftools
 
-# Create virtual environment (recommended)
-python3 -m venv pdf-env
-source pdf-env/bin/activate  # Linux/macOS
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Linux/macOS
 # or
-pdf-env\Scripts\activate     # Windows
+venv\Scripts\activate     # Windows
 
 # Install package
+pip install -r requirements.txt
 pip install -e .
 ```
+
+</details>
 
 ### Verify Installation
 
@@ -134,11 +177,17 @@ pip install -e .
 pdfmerge --version
 pdfsplit --version
 ocrutil --help
+pdfgettxt --version
+pdfprotect --version
+pdfthumbnails --version
+pdfrename --version
 ```
 
-### OCR Setup (Optional)
+All 7 tools should respond with version information.
 
-For OCR functionality, install Tesseract:
+### Optional: OCR Setup
+
+The automated installer includes Docker for OCR. For native Tesseract:
 
 **Linux (Ubuntu/Debian)**:
 ```bash
@@ -153,7 +202,9 @@ brew install tesseract tesseract-lang
 **Windows**:
 Download from [UB-Mannheim Tesseract](https://github.com/UB-Mannheim/tesseract/wiki)
 
-**[Complete Installation Guide](INSTALLATION.md)**
+### 📚 Complete Installation Guide
+
+**[Complete Installation Guide](docs/INSTALLATION.md)** - Detailed instructions, troubleshooting, and platform-specific notes
 
 ---
 
@@ -335,14 +386,14 @@ Automatically installed with `pip install -e .`:
 
 ### External Dependencies (OCR Only)
 - **Tesseract OCR**: System-level installation required
-  - See [INSTALLATION.md](INSTALLATION.md) for platform-specific instructions
+  - See [INSTALLATION.md](docs/INSTALLATION.md) for platform-specific instructions
 
 ---
 
 ## Documentation
 
 ### User Documentation
-- **[Installation Guide](INSTALLATION.md)** - Complete setup instructions
+- **[Installation Guide](docs/INSTALLATION.md)** - Complete setup instructions
 - **[PDF Merge](docs/tools/pdfmerge.md)** - Merge tool documentation
 - **[PDF Split](docs/tools/pdfsplit.md)** - Split tool documentation
 - **[OCR Utility](docs/tools/ocrutil.md)** - OCR tool documentation
@@ -388,7 +439,8 @@ mcp_pdftools/
 │   ├── design/                # Design documents
 │   └── test_reports/          # Test reports
 │
-├── INSTALLATION.md            # Installation guide
+├── docs/
+│   ├── INSTALLATION.md        # Installation guide
 ├── README.md                  # This file
 ├── requirements.txt           # Python dependencies
 └── setup.py                   # Package configuration
@@ -464,7 +516,7 @@ chmod +w /path/to/output/
 ```
 
 For detailed troubleshooting, see:
-- [INSTALLATION.md](INSTALLATION.md#troubleshooting)
+- [INSTALLATION.md](docs/INSTALLATION.md#troubleshooting)
 - Tool-specific documentation in [docs/tools/](docs/tools/)
 
 ---
@@ -581,7 +633,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ### Getting Help
 
 1. **Check Documentation**:
-   - [Installation Guide](INSTALLATION.md)
+   - [Installation Guide](docs/INSTALLATION.md)
    - Tool-specific docs in [docs/tools/](docs/tools/)
 
 2. **Search Issues**:
