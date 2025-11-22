@@ -4,14 +4,14 @@ A collection of Python scripts for working with PDF files including OCR, merging
 
 ## Features
 
-- **OCR Processing** (`ocrutil.py`) - Add OCR to PDF files using Docker and ocrmypdf
-- **PDF Renaming** (`renamepdf.py`) - Automatically rename invoice PDFs based on extracted text patterns
-- **PDF Merging** (`pdfmerge.py`) - Merge multiple PDF files into one
-- **PDF Splitting** (`splitpdf.py`) - Split PDF files into individual pages
-- **PDF Protection** (`protect.py`) - Add password protection to PDF files
-- **Text Extraction** (`pdfgettxt.py`) - Extract text from PDF files
-- **Thumbnail Generation** (`thumbnails.py`) - Generate thumbnail images from PDFs
-- **PDF Upload** (`uploadpdf.py`) - Upload PDF files to web services
+- **PDF Merging** - Combine multiple PDF files into one document
+- **PDF Splitting** - Split PDF files by pages or page ranges
+- **Invoice Renaming** - Intelligently rename invoice PDFs based on extracted data (invoice #, date, vendor)
+- **OCR Processing** - Add OCR to PDF files using Docker and ocrmypdf
+- **PDF Protection** - Add password protection to PDF files
+- **Text Extraction** - Extract text content from PDF files
+- **Thumbnail Generation** - Generate thumbnail images from PDFs
+- **CLI Tools** - Comprehensive command-line interface for all features
 
 ## Prerequisites
 
@@ -150,18 +150,33 @@ python ocrutil.py -files document.pdf -delete
 python ocrutil.py -path "*.pdf"  # Process all PDFs in directory
 ```
 
-### PDF Renaming
-Automatically rename invoice PDFs based on extracted information:
+### Invoice PDF Renaming
+Intelligently rename invoice PDFs based on extracted data (invoice number, date, vendor):
 
 ```bash
-# Using alias
-pdfrename invoice.pdf
+# Rename single invoice with default template
+pdfrename -f invoice.pdf
 
-# Direct command
-python renamepdf.py -f invoice.pdf -config renamepdf.json
+# Custom template
+pdfrename -f invoice.pdf -t "{date}_{vendor}_{invoice_nr}.pdf"
+
+# Batch processing with dry-run
+pdfrename -f invoices/*.pdf -d
+
+# Custom patterns from JSON file
+pdfrename -f invoice.pdf -p patterns.json -o renamed/
+
+# Verbose output
+pdfrename -f invoice.pdf --verbose
 ```
 
-The script extracts company name, invoice number, order number, and date from PDFs to generate standardized filenames.
+**Template placeholders:**
+- `{vendor}` - Vendor/supplier name
+- `{invoice_nr}` - Invoice number
+- `{date}` - Full date (YYYY-MM-DD)
+- `{year}`, `{month}`, `{day}` - Individual date components
+
+The tool extracts invoice data using regex patterns and supports custom patterns for different invoice formats.
 
 ### PDF Merging
 Combine multiple PDF files:
