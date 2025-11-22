@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  ocrmypdf:
+    restart: always
+    container_name: ocrmypdf
+    image: jbarlow83/ocrmypdf
+    # volumes:
+    #   - "C:/Users/thors/Nextcloud/ocr_in:/input"
+    #   - "C:/Users/thors/Nextcloud/ocr_out:/output"
+    #   - "C:/Users/thors/Nextcloud/ocr_archive:/processed"
+    # environment:
+    #   - OCR_OUTPUT_DIRECTORY_YEAR_MONTH=0
+    #   - OCR_ON_SUCCESS_ARCHIVE=1
+    # # user: "thorstens_nb\thors:Users"
+    # entrypoint: python3
+    # command: watcher.py
+

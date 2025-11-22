@@ -1,0 +1,8 @@
+[console_scripts]
+ocrutil = pdftools.ocr.cli:main
+pdfgettxt = pdftools.text_extraction.cli:main
+pdfmerge = pdftools.merge.cli:main
+pdfprotect = pdftools.protection.cli:main
+pdfrename = pdftools.renaming.cli:main
+pdfsplit = pdftools.split.cli:main
+pdfthumbnails = pdftools.thumbnails.cli:main

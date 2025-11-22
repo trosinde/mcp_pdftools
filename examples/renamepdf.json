@@ -1,0 +1,62 @@
+{
+    "ASKUSERV": {
+        "names": [
+            "ASKUSERV",
+            "askuserv"
+        ],
+        "invoice": "Invoice:\\s*(\\w+-\\d{4}-\\d{2})",
+        "order": "\\b47\\d{8}\\b",
+        "date": "(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2},\\s+\\d{4}",
+        "date_format" : "%B %d, %Y"
+    },
+    "CSW": {
+        "names": [
+            "CRITICAL Software GmbH"
+        ],
+        "invoice": "Invoice No\\.\\s*(\\S+)",
+        "order": "\\b47\\d{8}\\b",
+        "date": "Posting Date \\s*(\\S+)",
+        "date_format" : "%y-%m-%d"
+    },
+    "ZUEHLKE": {
+        "names": [
+            "Ziihlke Engineering AG",
+            "Zühlke",
+            "zuehlke"
+        ],
+        "invoice": "RECHNUNG Nr. \\s*(\\S+)",
+        "order": "\\b47\\d{8}\\b",
+        "date": "Schlieren, (\\d{2}\\.\\d{2}\\.\\d{4})",
+        "date_format" : "%d.%m.%Y"
+    },
+    "EXOR": {
+        "names": [
+            "exor",
+            "EXOR"
+        ],
+        "invoice": "",
+        "order": "\\b47\\d{8}\\b",
+        "date": "",
+        "date_format" : "%B %d, %Y"
+    },
+    "INTEGRATE": {
+        "names": [
+            "integrate",
+            "INTEGRATE"
+        ],
+        "invoice": "Rechnungs-Nr: \\s*(\\S+)",
+        "order": "\\b47\\d{8}\\b",
+        "date": "Root, (\\d{2}\\.\\d{2}\\.\\d{4})",
+        "date_format" : "%d.%m.%Y"
+    },
+    "CUBERA": {
+        "names": [
+            "CUBERA",
+            "cubera"
+        ],
+        "invoice": "Rechnung \\s*(\\S+)",
+        "order": "\\b47\\d{8}\\b",
+        "date": "Rechnungsdatum (\\d{2}\\.\\d{2}\\.\\d{4})",
+        "date_format" : "%d.%m.%Y"
+    }
+}
