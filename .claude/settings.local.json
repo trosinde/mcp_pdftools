@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(for dir in merge split ocr protection text_extraction thumbnails renaming cli)",
+      "Bash(do touch \"/mnt/c/Users/rosin-1/repos/mcp_pdftools/src/pdftools/$dir/__init__.py\")",
+      "Bash(done)",
+      "Bash(for dir in unit integration e2e)",
+      "Bash(do touch \"/mnt/c/Users/rosin-1/repos/mcp_pdftools/tests/$dir/__init__.py\")",
+      "Bash(tree:*)",
+      "Bash(python3 -m pytest:*)",
+      "Bash(python3:*)",
+      "Bash(pip install:*)",
+      "Bash(pdfmerge --help:*)",
+      "Bash(pdfsplit:*)",
+      "Bash(__NEW_LINE__ echo '=== Manual CLI Tests ===')",
+      "Bash(for tool in pdfmerge pdfsplit pdfgettxt ocrutil pdfprotect pdfthumbnails pdfrename)",
+      "Bash(do if which $tool)",
+      "Bash(then echo '✓ $tool: FOUND' else echo '✗ $tool: NOT FOUND' fi done)",
+      "Bash(pdfmerge:*)",
+      "Bash(ocrutil:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)",
+      "Bash(git checkout:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
