@@ -4,14 +4,21 @@ A collection of Python scripts for working with PDF files including OCR, merging
 
 ## Features
 
-- **OCR Processing** (`ocrutil.py`) - Add OCR to PDF files using Docker and ocrmypdf
-- **PDF Renaming** (`renamepdf.py`) - Automatically rename invoice PDFs based on extracted text patterns
-- **PDF Merging** (`pdfmerge.py`) - Merge multiple PDF files into one
-- **PDF Splitting** (`splitpdf.py`) - Split PDF files into individual pages
-- **PDF Protection** (`protect.py`) - Add password protection to PDF files
-- **Text Extraction** (`pdfgettxt.py`) - Extract text from PDF files
-- **Thumbnail Generation** (`thumbnails.py`) - Generate thumbnail images from PDFs
-- **PDF Upload** (`uploadpdf.py`) - Upload PDF files to web services
+- **OCR Processing** - Extract text from scanned PDFs using Tesseract OCR
+  - Multi-language support (German, English, French, Italian, Spanish)
+  - Output formats: TXT, searchable PDF, JSON
+  - CLI tool: `pdftools-ocr`
+- **PDF Merging** - Merge multiple PDF files into one
+  - Preserve bookmarks and metadata
+  - CLI tool: `pdftools-merge`
+- **PDF Splitting** - Split PDF files into individual pages
+  - Range selection support
+  - CLI tool: `pdftools-split`
+- **PDF Renaming** - Automatically rename invoice PDFs based on extracted text patterns
+- **PDF Protection** - Add password protection to PDF files
+- **Text Extraction** - Extract text from PDF files
+- **Thumbnail Generation** - Generate thumbnail images from PDFs
+- **PDF Upload** - Upload PDF files to web services
 
 ## Prerequisites
 
@@ -139,16 +146,28 @@ conda activate pdf
 ## Usage
 
 ### OCR Processing
-Add OCR to PDF files and optionally delete originals:
+Extract text from scanned PDF documents using Tesseract OCR:
 
 ```bash
-# Using alias
-pdfocr document.pdf
+# Basic usage (German language, TXT output)
+pdftools-ocr -f scan.pdf
 
-# Direct command
-python ocrutil.py -files document.pdf -delete
-python ocrutil.py -path "*.pdf"  # Process all PDFs in directory
+# Multiple languages, searchable PDF output
+pdftools-ocr -f document.pdf -l deu+eng --output-mode pdf -o searchable.pdf
+
+# Specific pages only
+pdftools-ocr -f contract.pdf --pages "1-5,10"
+
+# JSON output for further processing
+pdftools-ocr -f receipt.pdf --output-mode json -o result.json
+
+# Verbose mode
+pdftools-ocr -f scan.pdf --verbose
 ```
+
+**Supported languages**: deu (German), eng (English), fra (French), ita (Italian), spa (Spanish)
+
+**Note**: Requires Tesseract OCR to be installed (see Prerequisites section)
 
 ### PDF Renaming
 Automatically rename invoice PDFs based on extracted information:
