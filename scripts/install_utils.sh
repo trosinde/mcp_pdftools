@@ -681,7 +681,7 @@ install_package_editable() {
 verify_installation() {
     log_info "Verifying installation..."
 
-    if ! pip list | grep -q "pdftools"; then
+    if ! pip list | grep -q "mcp-pdftools"; then
         log_error "Package not found in pip list"
         return 1
     fi
