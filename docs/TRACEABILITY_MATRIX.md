@@ -22,6 +22,7 @@ REQ → DESIGN → CODE → TESTS → REPORT
 | [REQ-008](requirements/REQ-008-installation-deinstallation.md) v1.0 | [DESIGN-008](design/DESIGN-008-installation-deinstallation.md) v1.0 | `scripts/install_lib.py`, `scripts/health_check.py`, `scripts/uninstall_lib.py` | `tests/unit/test_install_lib.py`, `tests/unit/test_health_check.py` | [TEST-008](test_reports/TEST-008-installation-deinstallation.md) v1.0 | ✅ Released |
 | [REQ-009](requirements/REQ-009-cli-tools.md) v1.0 | [DESIGN-009](design/DESIGN-009-cli-tools.md) v1.0 | `src/pdftools/cli/`, `src/pdftools/*/cli.py`, `setup.py` | `tests/unit/test_cli_common.py`, `tests/e2e/test_cli_tools.py` | [TEST-009](test_reports/TEST-009-cli-tools.md) v1.0 | ✅ Released |
 | [REQ-010](requirements/REQ-010-mcp-server.md) v1.0 | [DESIGN-010](design/DESIGN-010-mcp-server.md) v1.0 | `mcp-server/` | `mcp-server/tests/` | TEST-010 v1.0 | Draft |
+| [REQ-011](requirements/REQ-011-automated-installation.md) v1.0 | [DESIGN-011](design/DESIGN-011-automated-installation.md) v1.0 | `install.sh`, `uninstall.sh`, `scripts/install_utils.sh`, `scripts/test_installation.py` | `scripts/test_installation.py` (18 tests) | [TEST-011](test_reports/TEST-011-automated-installation.md) v1.0 | ✅ Released |
 
 ## Status Legende
 
