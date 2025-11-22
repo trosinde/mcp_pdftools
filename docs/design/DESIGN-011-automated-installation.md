@@ -1,9 +1,11 @@
 # DESIGN-011: Automated Installation Scripts
 
 **Version**: 1.0
-**Status**: Draft
+**Status**: Approved
 **Author**: Architect
 **Date**: 2025-11-22
+**Approved By**: Architecture Review Board (ARCH-REVIEW-011)
+**Release Version**: v2.2.0
 **Requirement**: [REQ-011](../requirements/REQ-011-automated-installation.md) v1.0
 
 ---
