@@ -23,7 +23,8 @@
       "Bash(git commit:*)",
       "Bash(git reset:*)",
       "Bash(git rm:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git tag -a v2.1.0 -m \"$(cat <<''EOF''\nRelease v2.1.0 - PDF Split Feature\n\nNew Features:\n- PDF Split CLI tool (pdfsplit)\n- 4 split modes: pages, ranges, parts, specific\n- Complete API: split_pdf() with SplitConfig\n- 43 unit tests\n- Full documentation (REQ-002, DESIGN-002, TEST-002)\n\nQuality:\n- Code Review: 95/100\n- Security: 10/10\n- Test Coverage: validators + models (100%)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

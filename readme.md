@@ -185,17 +185,74 @@ python pdfgettxt.py document.pdf
 ```
 
 ### PDF Protection
-Add password protection:
+Protect PDF files with password encryption and permissions:
 
 ```bash
-python protect.py -input document.pdf -password mypassword
+# Protect with user password only
+pdfprotect -i document.pdf -u secret123
+
+# Protect with user and owner passwords
+pdfprotect -i contract.pdf -u open123 -w admin456
+
+# Allow specific permissions (printing and copying)
+pdfprotect -i report.pdf -u read123 -p print,copy
+
+# Custom output path
+pdfprotect -i invoice.pdf -o secure_invoice.pdf -u pass123
+
+# Verbose output
+pdfprotect -i document.pdf -u secret --verbose
 ```
 
+Valid permissions: `print`, `copy`, `modify`, `annotate`
+
 ### Thumbnail Generation
-Generate thumbnail images:
+Generate thumbnail preview images from PDF pages:
 
 ```bash
-python thumbnails.py document.pdf
+# Basic usage (all pages, medium size, PNG format)
+pdfthumbnails -f document.pdf
+
+# Custom size and format
+pdfthumbnails -f report.pdf -s large -F jpg -o ./previews
+
+# Specific pages only
+pdfthumbnails -f manual.pdf -p "1,5,10-15" -s small
+
+# Custom dimensions
+pdfthumbnails -f catalog.pdf -s 800x600 -F jpg -q 95
+
+# Verbose output
+pdfthumbnails -f book.pdf --verbose
+```
+
+**Thumbnail Sizes:**
+- `small`: 150x150 pixels
+- `medium`: 300x300 pixels (default)
+- `large`: 600x600 pixels
+- `WxH`: Custom size (e.g., `800x600`)
+
+**Output Formats:**
+- `png`: PNG format, lossless (default)
+- `jpg`: JPEG format, lossy with quality control (1-100)
+
+**Note:** Aspect ratio is always preserved. Images are scaled to fit within the specified size without cropping.
+
+**Dependencies:**
+- `pdf2image`: PDF to image conversion
+- `Pillow`: Image processing
+- `poppler-utils`: System dependency (required by pdf2image)
+
+Install system dependencies:
+```bash
+# Ubuntu/Debian
+sudo apt-get install poppler-utils
+
+# macOS
+brew install poppler
+
+# Windows
+# Download from: https://github.com/oschwartz10612/poppler-windows/releases
 ```
 
 ## Configuration
