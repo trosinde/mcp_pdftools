@@ -313,21 +313,25 @@ main() {
     upgrade_pip || exit 5
 
     # Step 7: Install dependencies
-    log_info "Step 7/10: Installing Python dependencies..."
+    log_info "Step 7/11: Installing Python dependencies..."
     install_python_dependencies || exit 7
     install_package_editable || exit 7
     verify_installation || exit 7
 
-    # Step 8: Run functional tests
-    log_info "Step 8/10: Running functional tests..."
+    # Step 8: Configure shell environment
+    log_info "Step 8/11: Configuring shell environment..."
+    configure_shell_environment || log_warn "Shell configuration completed with warnings"
+
+    # Step 9: Run functional tests
+    log_info "Step 9/11: Running functional tests..."
     run_functional_tests || log_warn "Tests completed with warnings"
 
-    # Step 9: Configure MCP server
-    log_info "Step 9/10: Configuring MCP server..."
+    # Step 10: Configure MCP server
+    log_info "Step 10/11: Configuring MCP server..."
     configure_mcp_server || log_warn "MCP configuration completed with warnings"
 
-    # Step 10: Finalize
-    log_info "Step 10/10: Finalizing installation..."
+    # Step 11: Finalize
+    log_info "Step 11/11: Finalizing installation..."
     finalize_installation
 
     log_success "Installation completed successfully!"

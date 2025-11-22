@@ -1031,3 +1031,457 @@ configure_mcp_server() {
 
     return 0
 }
+
+# ============================================================================
+# Shell Integration and PATH Configuration
+# ============================================================================
+
+detect_shell() {
+    # Check if SKIP_SHELL_CONFIG is set
+    if [ "$SKIP_SHELL_CONFIG" = "true" ]; then
+        log_info "⊘ Skipping shell configuration (SKIP_SHELL_CONFIG=true)"
+        return 1
+    fi
+
+    # Get shell from environment
+    local shell_path="${SHELL:-}"
+
+    # Handle missing $SHELL
+    if [ -z "$shell_path" ]; then
+        log_warn "SHELL environment variable not set"
+        # Try to detect from parent process
+        shell_path=$(ps -p $$ -o comm= 2>/dev/null || echo "")
+    fi
+
+    # Determine shell type
+    case "$shell_path" in
+        */bash)
+            echo "bash"
+            return 0
+            ;;
+        */zsh)
+            echo "zsh"
+            return 0
+            ;;
+        */fish)
+            echo "fish"
+            return 0
+            ;;
+        *powershell*|*pwsh*)
+            echo "powershell"
+            return 0
+            ;;
+        *)
+            echo "unknown"
+            return 1
+            ;;
+    esac
+}
+
+get_shell_config_file() {
+    local shell_type="$1"
+    local config_file=""
+
+    case "$shell_type" in
+        bash)
+            # Prefer .bashrc, fallback to .bash_profile
+            if [ -f "$HOME/.bashrc" ] || [ ! -f "$HOME/.bash_profile" ]; then
+                config_file="$HOME/.bashrc"
+            else
+                config_file="$HOME/.bash_profile"
+            fi
+            ;;
+        zsh)
+            config_file="$HOME/.zshrc"
+            ;;
+        fish)
+            config_file="$HOME/.config/fish/config.fish"
+            ;;
+        powershell)
+            config_file="$HOME/Documents/PowerShell/Microsoft.PowerShell_profile.ps1"
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+
+    echo "$config_file"
+    return 0
+}
+
+check_path_already_configured() {
+    local config_file="$1"
+    local install_dir="$2"
+
+    # Check if file exists
+    if [ ! -f "$config_file" ]; then
+        return 1  # Not configured
+    fi
+
+    # Search for marker comment
+    if grep -q "# mcp_pdftools - Added by automated installation" "$config_file"; then
+        return 0  # Already configured
+    fi
+
+    # Search for PATH containing install directory
+    if grep -q "$install_dir/venv/bin" "$config_file"; then
+        log_warn "Found PATH entry without marker comment"
+        log_warn "Manual configuration detected - skipping auto-config"
+        return 0  # Assume configured
+    fi
+
+    return 1  # Not configured
+}
+
+create_config_backup() {
+    local config_file="$1"
+    local timestamp=$(date +%Y-%m-%d_%H-%M-%S)
+    local backup_file="${config_file}.backup.${timestamp}"
+
+    # Check if file exists
+    if [ ! -f "$config_file" ]; then
+        log_info "Config file doesn't exist yet, no backup needed"
+        return 0
+    fi
+
+    # Create backup
+    if cp "$config_file" "$backup_file"; then
+        log_info "✓ Backup created: $backup_file"
+        echo "$backup_file"  # Return backup path
+        return 0
+    else
+        log_error "Failed to create backup"
+        return 1
+    fi
+}
+
+add_path_to_shell_config() {
+    local config_file="$1"
+    local install_dir="$2"
+    local shell_type="$3"
+
+    # Create config file if it doesn't exist
+    if [ ! -f "$config_file" ]; then
+        # Create parent directory if needed
+        local parent_dir=$(dirname "$config_file")
+        mkdir -p "$parent_dir" 2>/dev/null
+
+        touch "$config_file"
+        chmod 644 "$config_file"
+        log_info "Created new config file: $config_file"
+    fi
+
+    # Prepare PATH configuration
+    local marker="# mcp_pdftools - Added by automated installation"
+    local path_export=""
+
+    case "$shell_type" in
+        bash|zsh)
+            path_export="export PATH=\"\$HOME/mcp_pdftools/venv/bin:\$PATH\""
+            ;;
+        fish)
+            path_export="set -gx PATH \$HOME/mcp_pdftools/venv/bin \$PATH"
+            ;;
+        powershell)
+            path_export="\$env:Path = \"\$env:USERPROFILE\\mcp_pdftools\\venv\\Scripts;\$env:Path\""
+            ;;
+    esac
+
+    # Add to config file
+    {
+        echo ""
+        echo "$marker"
+        echo "$path_export"
+    } >> "$config_file"
+
+    log_info "✓ PATH configuration added to $config_file"
+    return 0
+}
+
+validate_shell_config() {
+    local config_file="$1"
+    local shell_type="$2"
+    local backup_file="$3"
+
+    case "$shell_type" in
+        bash)
+            if bash -n "$config_file" 2>/dev/null; then
+                log_info "✓ Syntax validation passed (bash -n)"
+                return 0
+            fi
+            ;;
+        zsh)
+            if zsh -n "$config_file" 2>/dev/null; then
+                log_info "✓ Syntax validation passed (zsh -n)"
+                return 0
+            fi
+            ;;
+        fish)
+            if fish -n "$config_file" 2>/dev/null; then
+                log_info "✓ Syntax validation passed (fish -n)"
+                return 0
+            fi
+            ;;
+        *)
+            log_warn "Syntax validation not supported for $shell_type"
+            return 0  # Assume valid
+            ;;
+    esac
+
+    # Validation failed - restore backup
+    log_error "Syntax validation failed!"
+    if [ -n "$backup_file" ] && [ -f "$backup_file" ]; then
+        log_info "Restoring backup from $backup_file"
+        mv "$backup_file" "$config_file"
+    fi
+    return 1
+}
+
+activate_path_current_session() {
+    local install_dir="$1"
+    local venv_bin="$install_dir/venv/bin"
+
+    # Add to PATH in current session
+    export PATH="$venv_bin:$PATH"
+    log_info "✓ PATH updated in current session"
+
+    # Verify
+    if [ -d "$venv_bin" ]; then
+        log_info "✓ Virtual environment bin directory exists"
+        return 0
+    else
+        log_error "Virtual environment bin directory not found: $venv_bin"
+        return 1
+    fi
+}
+
+verify_tools_accessible() {
+    local tools=("pdfmerge" "pdfsplit" "pdfgettxt" "ocrutil" "pdfprotect" "pdfthumbnails" "pdfrename")
+    local failed=0
+
+    log_info "Verifying CLI tools are accessible..."
+
+    for tool in "${tools[@]}"; do
+        if command -v "$tool" >/dev/null 2>&1; then
+            local tool_path=$(which "$tool" 2>/dev/null || echo "unknown")
+            log_info "  ✓ $tool: $tool_path"
+        else
+            log_warn "  ✗ $tool: Not found in PATH"
+            ((failed++))
+        fi
+    done
+
+    if [ $failed -eq 0 ]; then
+        log_info "✓ All 7 CLI tools are globally accessible"
+        return 0
+    else
+        log_warn "$failed CLI tools not accessible"
+        return 1
+    fi
+}
+
+show_manual_config_instructions() {
+    local shell_type="$1"
+    local install_dir="$2"
+
+    echo ""
+    echo "╔══════════════════════════════════════════════════════════╗"
+    echo "║       Manual Shell Configuration Instructions           ║"
+    echo "╚══════════════════════════════════════════════════════════╝"
+    echo ""
+    echo "To make PDF tools globally available, add to your shell config:"
+    echo ""
+
+    case "$shell_type" in
+        bash)
+            echo "For Bash (~/.bashrc):"
+            echo "  export PATH=\"$install_dir/venv/bin:\$PATH\""
+            echo ""
+            echo "Then reload:"
+            echo "  source ~/.bashrc"
+            ;;
+        zsh)
+            echo "For Zsh (~/.zshrc):"
+            echo "  export PATH=\"$install_dir/venv/bin:\$PATH\""
+            echo ""
+            echo "Then reload:"
+            echo "  source ~/.zshrc"
+            ;;
+        fish)
+            echo "For Fish (~/.config/fish/config.fish):"
+            echo "  set -gx PATH $install_dir/venv/bin \$PATH"
+            echo ""
+            echo "Then reload:"
+            echo "  source ~/.config/fish/config.fish"
+            ;;
+        *)
+            echo "Add the following to your shell configuration file:"
+            echo "  export PATH=\"$install_dir/venv/bin:\$PATH\""
+            echo ""
+            echo "Then reload your shell."
+            ;;
+    esac
+
+    echo ""
+    echo "To verify:"
+    echo "  which pdfmerge"
+    echo "  pdfmerge --version"
+    echo ""
+}
+
+request_shell_config_consent() {
+    local shell_type="$1"
+    local config_file="$2"
+    local install_dir="$3"
+
+    echo ""
+    echo "╔══════════════════════════════════════════════════════════╗"
+    echo "║         Shell Configuration (Optional)                   ║"
+    echo "╚══════════════════════════════════════════════════════════╝"
+    echo ""
+    echo "To make PDF tools globally available, we can configure your shell."
+    echo ""
+    echo "Detected shell: $shell_type"
+    echo "Configuration file: $config_file"
+    echo ""
+    echo "The following will be added:"
+    echo "  # mcp_pdftools - Added by automated installation"
+    echo "  export PATH=\"$install_dir/venv/bin:\$PATH\""
+    echo ""
+    echo "Benefits:"
+    echo "  ✓ Run 'pdfmerge' from any directory"
+    echo "  ✓ No need to activate virtual environment"
+    echo "  ✓ Uninstaller will automatically remove this configuration"
+    echo ""
+    echo "Alternative:"
+    echo "  ○ Skip this step and activate venv manually:"
+    echo "    \$ cd $install_dir"
+    echo "    \$ source venv/bin/activate"
+    echo ""
+
+    if confirm "Configure shell automatically?"; then
+        return 0
+    else
+        log_info "Shell configuration declined by user"
+        show_manual_config_instructions "$shell_type" "$install_dir"
+        return 1
+    fi
+}
+
+configure_shell_environment() {
+    log_info "Configuring shell environment..."
+
+    # 1. Detect shell
+    local shell_type=$(detect_shell)
+    if [ $? -ne 0 ] || [ "$shell_type" = "unknown" ]; then
+        log_warn "Could not detect shell type"
+        show_manual_config_instructions "unknown" "$INSTALL_DIR"
+        return 0  # Non-fatal
+    fi
+
+    log_info "Detected shell: $shell_type"
+
+    # 2. Get config file
+    local config_file=$(get_shell_config_file "$shell_type")
+    if [ -z "$config_file" ]; then
+        log_error "Could not determine config file for $shell_type"
+        show_manual_config_instructions "$shell_type" "$INSTALL_DIR"
+        return 0  # Non-fatal
+    fi
+
+    log_info "Configuration file: $config_file"
+
+    # 3. Check if already configured
+    if check_path_already_configured "$config_file" "$INSTALL_DIR"; then
+        log_info "✓ Shell already configured, skipping"
+        return 0
+    fi
+
+    # 4. Request user consent
+    if ! request_shell_config_consent "$shell_type" "$config_file" "$INSTALL_DIR"; then
+        return 0  # User declined, non-fatal
+    fi
+
+    # 5. Create backup
+    local backup_file=$(create_config_backup "$config_file")
+
+    # 6. Add PATH modification
+    if ! add_path_to_shell_config "$config_file" "$INSTALL_DIR" "$shell_type"; then
+        log_error "Failed to modify shell configuration"
+        return 1
+    fi
+
+    # 7. Validate syntax
+    if ! validate_shell_config "$config_file" "$shell_type" "$backup_file"; then
+        log_error "Shell configuration syntax validation failed"
+        return 1
+    fi
+
+    # 8. Activate in current session
+    activate_path_current_session "$INSTALL_DIR"
+
+    # 9. Verify tools accessible
+    if verify_tools_accessible; then
+        log_info "✓ Shell configured successfully"
+        echo ""
+        echo "PDF tools are now available globally:"
+        echo "  \$ pdfmerge file1.pdf file2.pdf -o merged.pdf"
+        echo "  \$ pdfsplit input.pdf -m pages"
+        echo "  \$ pdfgettxt document.pdf -o output.txt"
+        echo ""
+        return 0
+    else
+        log_warn "Some tools not accessible, but configuration applied"
+        return 0  # Non-fatal
+    fi
+}
+
+remove_shell_configuration() {
+    log_info "Removing shell configuration..."
+
+    # Detect shell configs to clean
+    local configs=(
+        "$HOME/.bashrc"
+        "$HOME/.bash_profile"
+        "$HOME/.zshrc"
+        "$HOME/.config/fish/config.fish"
+    )
+
+    local found=0
+
+    for config_file in "${configs[@]}"; do
+        if [ ! -f "$config_file" ]; then
+            continue
+        fi
+
+        # Check if marker exists
+        if ! grep -q "# mcp_pdftools - Added by automated installation" "$config_file"; then
+            continue
+        fi
+
+        found=1
+        log_info "Found mcp_pdftools configuration in $config_file"
+
+        # Create backup
+        local backup_file="${config_file}.backup.$(date +%Y-%m-%d_%H-%M-%S)"
+        if cp "$config_file" "$backup_file"; then
+            log_info "  ✓ Backup created: $backup_file"
+        fi
+
+        # Remove marker and next line (PATH export)
+        # Also remove empty line before marker if it exists
+        sed -i.tmp '/^$/{ N; /\n# mcp_pdftools - Added by automated installation/{ N; d; }; P; D; }' "$config_file"
+        sed -i.tmp '/# mcp_pdftools - Added by automated installation/,+1 d' "$config_file"
+        rm -f "${config_file}.tmp"
+
+        log_info "  ✓ Configuration removed from $config_file"
+    done
+
+    if [ $found -eq 0 ]; then
+        log_info "No shell configuration found to remove"
+    else
+        log_info "✓ Shell configuration cleanup complete"
+    fi
+
+    return 0
+}

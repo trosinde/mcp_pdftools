@@ -231,10 +231,13 @@ main() {
     log_info "Starting uninstallation..."
     echo ""
 
-    # Step 1: Deactivate venv
+    # Step 1: Remove shell configuration
+    remove_shell_configuration || log_warn "Shell configuration removal completed with warnings"
+
+    # Step 2: Deactivate venv
     deactivate_venv
 
-    # Step 2: Remove virtual environment
+    # Step 3: Remove virtual environment
     remove_venv || log_error "Failed to remove venv, continuing..."
 
     # Step 3: Remove installation directory (optional)
