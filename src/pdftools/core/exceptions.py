@@ -78,3 +78,38 @@ class InsufficientPermissionsError(PDFToolsError):
         super().__init__(
             f"Insufficient permissions to {operation}: {path}"
         )
+
+
+class OCRProcessingError(PDFProcessingError):
+    """Base exception for OCR processing errors"""
+    pass
+
+
+class TesseractNotFoundError(OCRProcessingError):
+    """Raised when Tesseract OCR is not installed"""
+
+    def __init__(self):
+        super().__init__(
+            "Tesseract OCR not found. Please install tesseract-ocr or use Docker container."
+        )
+
+
+class LanguageNotAvailableError(OCRProcessingError):
+    """Raised when required OCR language data is not available"""
+
+    def __init__(self, language: str):
+        self.language = language
+        super().__init__(
+            f"Language '{language}' not available. Please install tessdata-{language}"
+        )
+
+
+class ImageConversionError(OCRProcessingError):
+    """Raised when PDF to image conversion fails"""
+
+    def __init__(self, page_num: int, reason: str = "Unknown"):
+        self.page_num = page_num
+        self.reason = reason
+        super().__init__(
+            f"Failed to convert page {page_num} to image: {reason}"
+        )
