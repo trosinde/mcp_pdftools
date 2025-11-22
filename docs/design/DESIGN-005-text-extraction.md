@@ -2,7 +2,7 @@
 
 **ID**: DESIGN-005
 **Version**: 1.0
-**Status**: Approved
+**Status**: Implemented
 **Related Requirement**: [REQ-005](../requirements/REQ-005-text-extraction.md) v1.0
 **Created by**: System Architect
 **Created on**: 2025-11-22
