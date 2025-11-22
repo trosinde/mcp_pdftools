@@ -15,7 +15,7 @@ REQ → DESIGN → CODE → TESTS → REPORT
 | [REQ-001](requirements/REQ-001-pdf-merge.md) v1.0 | [DESIGN-001](design/DESIGN-001-pdf-merge.md) v1.0 | `src/pdftools/merge/` | `tests/unit/test_merge_*.py` | [TEST-001](test_reports/TEST-001-pdf-merge.md) v1.0 | ✅ Released |
 | [REQ-002](requirements/REQ-002-pdf-split.md) v1.0 | [DESIGN-002](design/DESIGN-002-pdf-split.md) v1.0 | `src/pdftools/split/` | `tests/unit/test_split_*.py` | [TEST-002](test_reports/TEST-002-pdf-split.md) v1.0 | ✅ Released |
 | [REQ-003](requirements/REQ-003-ocr.md) v1.0 | DESIGN-003 v1.0 | `src/pdftools/ocr/` | `tests/unit/test_ocr.py` | TEST-003 v1.0 | Draft |
-| [REQ-004](requirements/REQ-004-protection.md) v1.0 | DESIGN-004 v1.0 | `src/pdftools/protection/` | `tests/unit/test_protection.py` | TEST-004 v1.0 | Draft |
+| [REQ-004](requirements/REQ-004-protection.md) v1.0 | [DESIGN-004](design/DESIGN-004-protection.md) v1.0 | `src/pdftools/protection/` | `tests/unit/test_protection.py` | TEST-004 v1.0 | ✅ Released |
 | [REQ-005](requirements/REQ-005-text-extraction.md) v1.0 | [DESIGN-005](design/DESIGN-005-text-extraction.md) v1.0 | `src/pdftools/text_extraction/` | `tests/unit/test_text_extraction_*.py` | TEST-005 v1.0 | ✅ Released |
 | [REQ-006](requirements/REQ-006-thumbnails.md) v1.0 | DESIGN-006 v1.0 | `src/pdftools/thumbnails/` | `tests/unit/test_thumbnails.py` | TEST-006 v1.0 | Draft |
 | [REQ-007](requirements/REQ-007-invoice-renaming.md) v1.0 | DESIGN-007 v1.0 | `src/pdftools/renaming/` | `tests/unit/test_renaming.py` | TEST-007 v1.0 | Draft |
