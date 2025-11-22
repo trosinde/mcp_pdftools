@@ -64,6 +64,11 @@ class InvalidParameterError(ValidationError):
         )
 
 
+class InvalidRangeError(ValidationError):
+    """Raised when a page range is invalid"""
+    pass
+
+
 class InsufficientPermissionsError(PDFToolsError):
     """Raised when there are insufficient permissions for file operations"""
 
