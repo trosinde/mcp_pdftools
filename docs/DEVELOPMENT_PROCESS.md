@@ -16,7 +16,7 @@ Dieses Dokument beschreibt den **verbindlichen Entwicklungsprozess** für alle F
 
 ## Team-Rollen
 
-Das Development Team besteht aus 5 spezialisierten Rollen:
+Das Development Team besteht aus 6 spezialisierten Rollen:
 
 ### 1. Requirements Engineer 📋
 **Verantwortlichkeiten**:
@@ -71,6 +71,28 @@ Das Development Team besteht aus 5 spezialisierten Rollen:
 **Deliverables**:
 - Scripts in `scripts/`
 - Docker/Docker-Compose Configs
+
+### 6. Technical Writer 📚
+**Verantwortlichkeiten**:
+- Erstellt und pflegt End-User-Dokumentation
+- Aktualisiert README.md mit neuesten Features
+- Erstellt Installationsanleitungen (INSTALLATION.md)
+- Erstellt Tool-Dokumentation für jedes CLI-Tool (docs/tools/)
+- Stellt sicher, dass Dokumentation Implementation widerspiegelt
+- Erstellt Usage-Beispiele und Tutorials
+
+**Deliverables**:
+- `README.md` (aktuell gehalten)
+- `INSTALLATION.md` (Schritt-für-Schritt Anleitung)
+- `docs/tools/TOOL-NAME.md` für jedes CLI-Tool (pdfmerge, pdfsplit, etc.)
+- User Guides und Tutorials
+
+**Prüfungen**:
+- ✅ README.md ist aktuell mit allen released Features
+- ✅ Installation instructions existieren
+- ✅ Jedes CLI-Tool hat eine eigene Markdown-Dokumentation
+- ✅ Beispiele sind funktionstüchtig und getestet
+- ✅ Screenshots/Diagramme wo sinnvoll
 
 ---
 
@@ -395,7 +417,14 @@ pytest tests/integration/ -v
    TEST-XXX: Status = "Passed"
    ```
 
-4. Traceability Matrix aktualisieren:
+4. **Technical Writer**: End-User-Dokumentation erstellen/aktualisieren:
+   - [ ] `README.md` mit neuem Feature aktualisieren
+   - [ ] Tool-Dokumentation erstellen: `docs/tools/TOOL-NAME.md`
+   - [ ] Installation Instructions in `INSTALLATION.md` aktualisieren
+   - [ ] Usage-Beispiele hinzufügen
+   - [ ] Prüfen: Alle CLI-Tools haben Dokumentation
+
+5. Traceability Matrix aktualisieren:
    ```markdown
    | REQ-XXX v1.0 | DESIGN-XXX v1.0 | src/pdftools/module/ | tests/.../test_*.py | TEST-XXX v1.0 | ✅ Released |
    ```
