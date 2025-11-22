@@ -46,59 +46,33 @@ The **ocrutil** tool extracts text from scanned PDF documents using Optical Char
 
 ## Installation
 
-### Step 1: Install MCP PDF Tools
+### Quick Install (Recommended)
+
+**Linux/macOS** - Automated installation:
+```bash
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+./install.sh
+```
+
+**Windows** - Follow manual instructions:
+```batch
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+install.bat
+```
+
+### Manual Install
+
+If you already have Python and dependencies:
 
 ```bash
 pip install -e .
 ```
 
-### Step 2: Install Tesseract OCR
+### Complete Guide
 
-**Linux (Ubuntu/Debian)**:
-```bash
-sudo apt-get update
-sudo apt-get install tesseract-ocr
-
-# Install language packs
-sudo apt-get install tesseract-ocr-deu  # German
-sudo apt-get install tesseract-ocr-eng  # English
-sudo apt-get install tesseract-ocr-fra  # French
-sudo apt-get install tesseract-ocr-ita  # Italian
-sudo apt-get install tesseract-ocr-spa  # Spanish
-```
-
-**macOS**:
-```bash
-brew install tesseract
-brew install tesseract-lang  # All languages
-```
-
-**Windows**:
-1. Download from [UB-Mannheim Tesseract](https://github.com/UB-Mannheim/tesseract/wiki)
-2. Run installer
-3. Select language packs during installation
-4. Add to PATH: `C:\Program Files\Tesseract-OCR`
-
-### Step 3: Verify Installation
-
-```bash
-tesseract --version
-tesseract --list-langs
-```
-
-Expected output:
-```
-tesseract 5.x.x
-Available languages:
-deu
-eng
-fra
-ita
-spa
-...
-```
-
-See [INSTALLATION.md](../../INSTALLATION.md) for detailed installation instructions.
+See **[Installation Guide](../INSTALLATION.md)** for detailed instructions, troubleshooting, and platform-specific notes.
 
 ---
 

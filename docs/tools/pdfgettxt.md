@@ -43,19 +43,33 @@ The **pdfgettxt** tool extracts text content from PDF files using various extrac
 
 ## Installation
 
-Install MCP PDF Tools package:
+### Quick Install (Recommended)
+
+**Linux/macOS** - Automated installation:
+```bash
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+./install.sh
+```
+
+**Windows** - Follow manual instructions:
+```batch
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+install.bat
+```
+
+### Manual Install
+
+If you already have Python and dependencies:
 
 ```bash
 pip install -e .
 ```
 
-Or install just the dependencies:
+### Complete Guide
 
-```bash
-pip install PyPDF2>=3.0.1 pdfplumber>=0.9.0
-```
-
-See [INSTALLATION.md](../../INSTALLATION.md) for detailed installation instructions.
+See **[Installation Guide](../INSTALLATION.md)** for detailed instructions, troubleshooting, and platform-specific notes.
 
 ---
 

@@ -45,42 +45,33 @@ The **pdfthumbnails** tool generates thumbnail preview images from PDF pages. It
 
 ## Installation
 
-### Step 1: Install MCP PDF Tools
+### Quick Install (Recommended)
+
+**Linux/macOS** - Automated installation:
+```bash
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+./install.sh
+```
+
+**Windows** - Follow manual instructions:
+```batch
+git clone https://github.com/yourusername/mcp_pdftools.git
+cd mcp_pdftools
+install.bat
+```
+
+### Manual Install
+
+If you already have Python and dependencies:
 
 ```bash
 pip install -e .
 ```
 
-### Step 2: Install System Dependencies
+### Complete Guide
 
-**Linux (Ubuntu/Debian)**:
-```bash
-sudo apt-get update
-sudo apt-get install poppler-utils
-```
-
-**macOS**:
-```bash
-brew install poppler
-```
-
-**Windows**:
-1. Download from [poppler for Windows](https://github.com/oschwartz10612/poppler-windows/releases)
-2. Extract to `C:\Program Files\poppler`
-3. Add `C:\Program Files\poppler\Library\bin` to PATH
-
-### Step 3: Verify Installation
-
-```bash
-pdftoppm -v
-```
-
-Expected output:
-```
-pdftoppm version 21.xx.x
-```
-
-See [INSTALLATION.md](../../INSTALLATION.md) for detailed installation instructions.
+See **[Installation Guide](../INSTALLATION.md)** for detailed instructions, troubleshooting, and platform-specific notes.
 
 ---
 
