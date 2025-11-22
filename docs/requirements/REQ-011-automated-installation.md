@@ -1,11 +1,15 @@
 # REQ-011: Automated Installation Scripts
 
-**Version**: 1.0
-**Status**: Released
+**Version**: 1.1
+**Status**: Draft (Extension for Shell Integration)
 **Author**: Requirements Engineer
 **Date**: 2025-11-22
-**Release Version**: v2.2.0
+**Previous Release**: v2.2.0 (Version 1.0)
 **Feature**: Automated Installation for Linux, Windows, macOS
+
+**Version History**:
+- **1.1** (2025-11-22): Added US-011-7 and FR-011-13 for shell integration and PATH configuration
+- **1.0** (2025-11-22): Initial release with basic installation and uninstallation (v2.2.0)
 
 ---
 
@@ -100,9 +104,11 @@ Provide robust, user-friendly installation scripts that automatically set up the
 **Acceptance Criteria**:
 - Removes virtual environment
 - Removes cloned repository
+- Removes PATH modifications from shell configuration files (`.bashrc`, `.zshrc`, etc.)
 - Optionally removes Docker containers/images
 - Preserves system-wide dependencies (Python, Docker, Git)
 - Asks for confirmation before deletion
+- Shows what will be removed before proceeding
 - Logs uninstallation actions
 
 ### US-011-6: MCP Server Auto-Configuration
@@ -129,6 +135,23 @@ Provide robust, user-friendly installation scripts that automatically set up the
 - Configures selected MCP server(s) according to REQ-010
 - Verifies MCP server installation with test call
 - Logs MCP server configuration steps
+
+### US-011-7: Shell Integration and PATH Configuration
+**As a** user who wants to use CLI tools directly
+**I want** the installation script to configure my shell environment
+**So that** all PDF tools are available system-wide without activating the virtual environment
+
+**Acceptance Criteria**:
+- Script detects user's shell (bash, zsh, fish, PowerShell)
+- Adds virtual environment bin directory to PATH in shell configuration:
+  - Linux/macOS: Adds to `~/.bashrc`, `~/.zshrc`, or `~/.config/fish/config.fish`
+  - Windows: Adds to user PATH environment variable
+- Configuration allows tools to be called directly: `pdfmerge`, `pdfsplit`, etc.
+- Changes take effect immediately (sources config file or updates current session)
+- Uninstallation script removes PATH modifications from shell configs
+- Asks for user confirmation before modifying shell configuration files
+- Provides manual instructions if automatic configuration fails
+- Logs all shell configuration changes
 
 ---
 
@@ -381,19 +404,25 @@ install.bat  # Detects Windows 11 x86_64
   1. Display what will be removed
   2. Ask for user confirmation (Y/n)
   3. Deactivate virtual environment if active
-  4. Remove virtual environment directory
-  5. Optionally remove repository directory
-  6. Optionally remove Docker images: `docker rmi mcp-pdftools-*`
-  7. Remove log files (with confirmation)
-  8. Do NOT remove system dependencies (Python, Docker, Git)
+  4. Remove PATH modifications from shell configuration files:
+     - Search for `# mcp_pdftools - Added by automated installation` marker
+     - Remove marker line and associated PATH export
+     - Clean up `.bashrc`, `.zshrc`, `.config/fish/config.fish`, or PowerShell profile
+  5. Remove virtual environment directory
+  6. Optionally remove repository directory
+  7. Optionally remove Docker images: `docker rmi mcp-pdftools-*`
+  8. Remove log files (with confirmation)
+  9. Do NOT remove system dependencies (Python, Docker, Git)
 - **Logging**: Create uninstallation log
 
 **Validation**:
 - User can cancel at confirmation
+- Shell configuration files cleaned (PATH modifications removed)
 - Virtual environment removed
 - Repository optionally removed
 - System dependencies preserved
 - Uninstallation logged
+- Shell remains functional after cleanup
 
 ### FR-011-12: MCP Server Detection and Configuration
 **Priority**: SHOULD
@@ -475,6 +504,85 @@ install.bat  # Detects Windows 11 x86_64
 - Config files updated with correct paths
 - Test call to MCP server succeeds
 - User can immediately use PDF tools from their AI agent
+
+### FR-011-13: Shell Integration and PATH Configuration
+**Priority**: MUST
+**Description**: Configure user's shell environment to make CLI tools globally accessible without requiring virtual environment activation
+
+**Details**:
+- **Shell Detection**:
+  - Linux/macOS: Detect shell from `$SHELL` environment variable
+  - Supported shells: bash, zsh, fish
+  - Windows: Use PowerShell profile or system PATH
+
+- **PATH Configuration**:
+  - **Linux/macOS**:
+    - Bash: Append to `~/.bashrc`
+    - Zsh: Append to `~/.zshrc`
+    - Fish: Append to `~/.config/fish/config.fish`
+    - Configuration line:
+      ```bash
+      # mcp_pdftools - Added by automated installation
+      export PATH="$HOME/mcp_pdftools/venv/bin:$PATH"
+      ```
+
+  - **Windows**:
+    - Update user PATH environment variable via PowerShell:
+      ```powershell
+      [Environment]::SetEnvironmentVariable(
+        "Path",
+        "$env:Path;$env:USERPROFILE\mcp_pdftools\venv\Scripts",
+        "User"
+      )
+      ```
+    - Or add to PowerShell profile: `$PROFILE`
+
+- **User Consent**:
+  - Before modifying shell config, display prompt:
+    ```
+    Configure shell to make PDF tools globally available?
+    This will add the following to your ~/.bashrc:
+      export PATH="$HOME/mcp_pdftools/venv/bin:$PATH"
+
+    Proceed? [Y/n]:
+    ```
+  - If user declines, display manual instructions
+
+- **Immediate Effect**:
+  - After adding to config, source the file: `source ~/.bashrc`
+  - Update current session PATH
+  - Test that tools are accessible: `which pdfmerge`
+
+- **Uninstallation Cleanup**:
+  - Detect and remove PATH modifications during uninstallation
+  - Search for comment marker: `# mcp_pdftools - Added by automated installation`
+  - Remove marker line and PATH export line
+  - Restore shell config to original state
+
+- **Manual Instructions** (fallback):
+  If automatic configuration fails or user declines:
+  ```
+  To use PDF tools globally, add to your shell config:
+
+  For Bash (~/.bashrc):
+    export PATH="$HOME/mcp_pdftools/venv/bin:$PATH"
+
+  For Zsh (~/.zshrc):
+    export PATH="$HOME/mcp_pdftools/venv/bin:$PATH"
+
+  Then reload: source ~/.bashrc
+  ```
+
+- **Environment Variables**:
+  - `SKIP_SHELL_CONFIG`: Skip shell configuration (default: false)
+
+**Validation**:
+- User's shell correctly detected
+- Shell config file exists or is created
+- PATH modification added with proper syntax
+- Configuration takes effect immediately
+- All 7 CLI tools callable without `./` or full path: `pdfmerge --version`
+- Uninstallation removes PATH modifications cleanly
 
 ---
 
