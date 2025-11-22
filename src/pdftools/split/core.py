@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Optional
 
 from pdftools.core.exceptions import PDFNotFoundError, PDFProcessingError, ValidationError
-from pdftools.core.utils import ensure_dir_exists
+from pdftools.core.utils import ensure_directory_exists
 from pdftools.split.models import SplitMode, SplitConfig, SplitResult
 from pdftools.split.validators import validate_pdf_path, validate_output_dir
 from pdftools.split.processors import (

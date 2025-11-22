@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Optional
 
-from pypdf import PdfReader, PdfWriter
+from PyPDF2 import PdfReader, PdfWriter
 
 from pdftools.core.exceptions import PDFProcessingError, ValidationError
 from pdftools.split.models import SplitMode, SplitResult
