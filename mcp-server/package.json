@@ -1,0 +1,49 @@
+{
+  "name": "@trosinde/mcp-pdftools",
+  "version": "1.0.0",
+  "description": "MCP Server for PDFTools - AI agent integration for PDF operations",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "mcp-pdftools": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "npm run build && node dist/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint": "eslint src/**/*.ts",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "pdf",
+    "ai-agent",
+    "claude",
+    "opencode",
+    "model-context-protocol"
+  ],
+  "author": "trosinde",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trosinde/mcp_pdftools.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  }
+}
