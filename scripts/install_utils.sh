@@ -986,7 +986,86 @@ print('✓ Config updated')
 
 configure_mcp_for_opencode() {
     log_info "Configuring MCP server for OpenCode..."
+
+    # Step 1: Install and build MCP server
     install_mcp_server || return 1
+
+    # Step 2: Run health check
+    if [ -f "$INSTALL_DIR/scripts/health_check_mcp.sh" ]; then
+        log_info "Running MCP server health check..."
+        chmod +x "$INSTALL_DIR/scripts/health_check_mcp.sh"
+        if "$INSTALL_DIR/scripts/health_check_mcp.sh" > /dev/null 2>&1; then
+            log_info "✓ Health check passed"
+        else
+            log_warn "⚠ Health check failed - continuing anyway"
+        fi
+    fi
+
+    # Step 3: Configure opencode.json
+    local opencode_config="$HOME/.config/opencode/opencode.json"
+
+    if [ -f "$opencode_config" ]; then
+        log_info "Found OpenCode configuration"
+
+        # Check if already configured
+        if grep -q '"pdftools"' "$opencode_config"; then
+            log_info "⊘ PDFTools already configured in OpenCode"
+        else
+            log_info "Adding PDFTools to OpenCode configuration..."
+
+            # Use Python to safely merge JSON
+            python3 <<EOF
+import json
+import sys
+
+config_file = "$opencode_config"
+mcp_server_path = "$INSTALL_DIR/mcp-server/dist/index.js"
+venv_path = "$INSTALL_DIR/venv/bin/python"
+
+try:
+    with open(config_file, 'r') as f:
+        config = json.load(f)
+
+    # Ensure mcp section exists
+    if 'mcp' not in config:
+        config['mcp'] = {}
+
+    # Add pdftools configuration
+    config['mcp']['pdftools'] = {
+        "type": "local",
+        "command": ["node", mcp_server_path],
+        "enabled": True,
+        "environment": {
+            "MCP_PDFTOOLS_VENV": venv_path,
+            "MCP_PDFTOOLS_TIMEOUT": "300000",
+            "MCP_PDFTOOLS_MAX_OUTPUT": "10485760"
+        },
+        "timeout": 300000
+    }
+
+    # Write back
+    with open(config_file, 'w') as f:
+        json.dump(config, f, indent=2)
+
+    print("✓ Configuration added successfully")
+    sys.exit(0)
+except Exception as e:
+    print(f"✗ Error: {e}", file=sys.stderr)
+    sys.exit(1)
+EOF
+
+            if [ $? -eq 0 ]; then
+                log_info "✓ OpenCode configuration updated"
+            else
+                log_warn "⚠ Failed to update OpenCode configuration"
+                log_warn "  You can run: $INSTALL_DIR/scripts/generate_mcp_config.sh"
+            fi
+        fi
+    else
+        log_warn "OpenCode configuration not found at $opencode_config"
+        log_info "If you install OpenCode later, run: $INSTALL_DIR/scripts/generate_mcp_config.sh"
+    fi
+
     log_info "✓ MCP server configured for OpenCode"
     return 0
 }
