@@ -567,28 +567,122 @@ See [DEVELOPMENT_PROCESS.md](docs/DEVELOPMENT_PROCESS.md) for detailed workflow.
 
 ---
 
-## Roadmap
+## MCP Server Integration
 
-### Future Features
+### ✅ MCP Server for AI Agents (REQ-010)
+**Status**: ✅ Released (v1.0)
 
-#### Planned: MCP Server Integration (REQ-010)
-**Status**: Design Phase (Draft)
-
-Enable AI Agents (Claude Code, Claude Desktop, OpenCode) to use all PDFTools via MCP (Model Context Protocol).
+The MCP Server enables AI Agents (Claude Code, Claude Desktop, OpenCode, Zed) to use all 7 PDF tools via the Model Context Protocol.
 
 **What it enables:**
 - Natural language PDF workflows: "Merge these 3 PDFs and protect with password"
-- Automatic tool selection by AI
-- Seamless integration in Claude Desktop, Claude Code, OpenCode
+- Automatic tool selection by AI agents
+- Seamless integration in Claude Desktop, Claude Code, OpenCode, and other MCP-compatible clients
 
-**Installation (when released):**
+**Available MCP Tools:**
+| MCP Tool Name | CLI Tool | Description |
+|---------------|----------|-------------|
+| `pdf_merge` | pdfmerge | Merge multiple PDF files into one |
+| `pdf_split` | pdfsplit | Split PDF into multiple files |
+| `pdf_ocr` | ocrutil | Extract text from scanned PDFs using OCR |
+| `pdf_extract_text` | pdfgettxt | Extract text from PDF files |
+| `pdf_protect` | pdfprotect | Add password protection to PDFs |
+| `pdf_thumbnails` | pdfthumbnails | Generate thumbnail images from PDFs |
+| `pdf_rename_invoice` | pdfrename | Intelligently rename invoice PDFs |
+
+### Installation
+
+The MCP server is automatically installed and configured when you run `./install.sh`.
+
+**What the installer does:**
+- ✅ Installs MCP server dependencies (Node.js packages)
+- ✅ Compiles TypeScript to JavaScript
+- ✅ Runs health checks to verify installation
+- ✅ Auto-generates configuration for detected AI agents
+- ✅ Optionally adds configuration to OpenCode, Claude Desktop, or Zed
+
+**Manual Installation:**
 ```bash
-npm install -g @trosinde/mcp-pdftools
+cd mcp-server
+npm install
+npm run build
+npm test
+```
+
+### Configuration
+
+After installation, the MCP server can be used with any MCP-compatible AI agent:
+
+**OpenCode** (`~/.config/opencode/opencode.json`):
+```json
+{
+  "mcp": {
+    "pdftools": {
+      "type": "local",
+      "command": ["node", "/path/to/mcp_pdftools/mcp-server/dist/index.js"],
+      "enabled": true,
+      "environment": {
+        "MCP_PDFTOOLS_VENV": "/path/to/mcp_pdftools/venv/bin/python"
+      },
+      "timeout": 300000
+    }
+  }
+}
+```
+
+**Claude Desktop** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "pdftools": {
+      "command": "node",
+      "args": ["/path/to/mcp_pdftools/mcp-server/dist/index.js"]
+    }
+  }
+}
+```
+
+The `./install.sh` script can automatically generate and add this configuration for you.
+
+### Health Check
+
+Verify your MCP server installation:
+```bash
+./scripts/health_check_mcp.sh
+```
+
+This checks:
+- ✅ MCP server directory exists
+- ✅ Dependencies installed
+- ✅ TypeScript compiled successfully
+- ✅ All 7 tools registered
+- ✅ Server starts correctly
+- ✅ All tests passing
+
+### Usage Examples
+
+Once configured, you can use natural language with your AI agent:
+
+```
+User: "Merge report_part1.pdf and report_part2.pdf into final_report.pdf"
+AI Agent: [Uses pdf_merge tool automatically]
+AI Agent: "I've successfully merged the two PDF files into final_report.pdf"
+
+User: "Extract text from this scanned invoice: scan.pdf"
+AI Agent: [Uses pdf_ocr and pdf_extract_text tools]
+AI Agent: "Here's the extracted text from the invoice: [content...]"
 ```
 
 **Documentation:**
 - [REQ-010: MCP Server Requirements](docs/requirements/REQ-010-mcp-server.md)
+- [REQ-010.1: Health Check & Auto-Configuration](docs/requirements/REQ-010.1-health-check.md)
 - [DESIGN-010: MCP Server Design](docs/design/DESIGN-010-mcp-server.md)
+
+---
+
+## Roadmap
+
+### Future Features
 
 #### Future Enhancements
 - GUI application for non-technical users

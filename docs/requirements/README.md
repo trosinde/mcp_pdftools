@@ -54,12 +54,15 @@ Test Report (TEST-XXX v1.0)
 
 | ID | Name | Version | Status | Beschreibung |
 |----|------|---------|--------|--------------|
-| REQ-001 | PDF Merge | 1.0 | Released | Zusammenführen mehrerer PDFs |
-| REQ-002 | PDF Split | 1.0 | Released | PDF in einzelne Seiten/Bereiche aufteilen (4 Modi) |
-| REQ-003 | OCR Processing | 1.0 | Draft | OCR-Verarbeitung von PDFs |
-| REQ-004 | PDF Protection | 1.0 | Draft | PDF-Verschlüsselung |
-| REQ-005 | Text Extraction | 1.0 | Released | Textextraktion aus PDFs (4 Modi, 3 Formate) |
-| REQ-006 | Thumbnail Generation | 1.0 | Draft | Thumbnail-Generierung |
-| REQ-007 | Invoice Renaming | 1.0 | Draft | Intelligente PDF-Umbenennung |
-| REQ-008 | Installation & De-Installation | 1.0 | Released | Automatisierte Installation mit Docker-Setup für OCR |
-| REQ-009 | CLI Tools | 1.0 | Released | 7 Kommandozeilen-Tools für alle Features |
+| REQ-001 | PDF Merge | 1.0 | ✅ Released | Zusammenführen mehrerer PDFs |
+| REQ-002 | PDF Split | 1.0 | ✅ Released | PDF in einzelne Seiten/Bereiche aufteilen (4 Modi) |
+| REQ-003 | OCR Processing | 1.0 | ✅ Released | OCR-Verarbeitung von PDFs mit Tesseract |
+| REQ-004 | PDF Protection | 1.0 | ✅ Released | PDF-Verschlüsselung und Permissions |
+| REQ-005 | Text Extraction | 1.0 | ✅ Released | Textextraktion aus PDFs (4 Modi, 3 Formate) |
+| REQ-006 | Thumbnail Generation | 1.0 | ✅ Released | Thumbnail-Generierung aus PDFs |
+| REQ-007 | Invoice Renaming | 1.0 | ✅ Released | Intelligente PDF-Umbenennung mit Regex |
+| REQ-008 | Installation & De-Installation | 1.0 | ✅ Released | Automatisierte Installation mit Docker-Setup für OCR |
+| REQ-009 | CLI Tools | 1.0 | ✅ Released | 7 Kommandozeilen-Tools für alle Features |
+| REQ-010 | MCP Server | 1.0 | ✅ Released | Model Context Protocol Server für AI Agents |
+| REQ-010.1 | MCP Health Check | 1.0 | ✅ Released | Health Check & Auto-Konfiguration für MCP Server |
+| REQ-011 | Automated Installation | 1.0 | ✅ Released | Vollautomatische Installation mit Dependencies |

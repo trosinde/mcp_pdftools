@@ -19,12 +19,17 @@ Aktuelle Requirements (detaillierte Dokumentation in `docs/requirements/`):
 | ID | Feature | Version | Status | Dokument |
 |----|---------|---------|--------|----------|
 | REQ-001 | PDF Merge | 1.0 | ✅ Released | [REQ-001-pdf-merge.md](docs/requirements/REQ-001-pdf-merge.md) |
-| REQ-002 | PDF Split | 1.0 | Planned | docs/requirements/REQ-002-pdf-split.md |
-| REQ-003 | OCR Processing | 1.0 | Planned | docs/requirements/REQ-003-ocr.md |
-| REQ-004 | PDF Protection | 1.0 | Planned | docs/requirements/REQ-004-protection.md |
-| REQ-005 | Text Extraction | 1.0 | Planned | docs/requirements/REQ-005-text-extraction.md |
-| REQ-006 | Thumbnail Generation | 1.0 | Planned | docs/requirements/REQ-006-thumbnails.md |
-| REQ-007 | Invoice Renaming | 1.0 | Planned | docs/requirements/REQ-007-invoice-renaming.md |
+| REQ-002 | PDF Split | 1.0 | ✅ Released | [REQ-002-pdf-split.md](docs/requirements/REQ-002-pdf-split.md) |
+| REQ-003 | OCR Processing | 1.0 | ✅ Released | [REQ-003-ocr.md](docs/requirements/REQ-003-ocr.md) |
+| REQ-004 | PDF Protection | 1.0 | ✅ Released | [REQ-004-protection.md](docs/requirements/REQ-004-protection.md) |
+| REQ-005 | Text Extraction | 1.0 | ✅ Released | [REQ-005-text-extraction.md](docs/requirements/REQ-005-text-extraction.md) |
+| REQ-006 | Thumbnail Generation | 1.0 | ✅ Released | [REQ-006-thumbnails.md](docs/requirements/REQ-006-thumbnails.md) |
+| REQ-007 | Invoice Renaming | 1.0 | ✅ Released | [REQ-007-invoice-renaming.md](docs/requirements/REQ-007-invoice-renaming.md) |
+| REQ-008 | Installation & De-Installation | 1.0 | ✅ Released | [REQ-008-installation-deinstallation.md](docs/requirements/REQ-008-installation-deinstallation.md) |
+| REQ-009 | CLI Tools | 1.0 | ✅ Released | [REQ-009-cli-tools.md](docs/requirements/REQ-009-cli-tools.md) |
+| REQ-010 | MCP Server | 1.0 | ✅ Released | [REQ-010-mcp-server.md](docs/requirements/REQ-010-mcp-server.md) |
+| REQ-010.1 | MCP Health Check & Config | 1.0 | ✅ Released | [REQ-010.1-health-check.md](docs/requirements/REQ-010.1-health-check.md) |
+| REQ-011 | Automated Installation | 1.0 | ✅ Released | [REQ-011-automated-installation.md](docs/requirements/REQ-011-automated-installation.md) |
 
 **Vollständige Traceability**: Siehe [TRACEABILITY_MATRIX.md](docs/TRACEABILITY_MATRIX.md)
 
